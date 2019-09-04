@@ -10,6 +10,7 @@ function verificar() {
     var fSex = document.getElementsByName("radSexo");
     var idade = ano - Number(fAno.value);
     var genero = "";
+    
     var img = document.createElement("img");
     img.setAttribute("id", "foto"); //igual ao HTML <img id='foto'>
 
