@@ -1,7 +1,7 @@
 let valores = [2,5,9]
 console.log(valores.length)
 
-console.log(valores.indexOf(9))
+console.log(valores.indexOf(2) !== -1)
 
 valores.push(7)
 valores.sort()
