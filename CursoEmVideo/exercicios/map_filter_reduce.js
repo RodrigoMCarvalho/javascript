@@ -87,9 +87,14 @@ const pessoas = [
   }
 ];
 
-pessoas.reduce(
+const pessoasAgrupadas = pessoas.reduce(
   function(valorAcumulador, valorArray) {
     const maiorOuMenor = valorArray.idade <= 18 ? "menores" : "maiores";
+    valorAcumulador[maiorOuMenor].push(valorArray);
+
+    return valorAcumulador;
   },
-  { maiores: [], menores: [] }
+  { menores: [], maiores: [] }
 );
+
+console.log('Pessoas agrupadas: ' + pessoasAgrupadas)
