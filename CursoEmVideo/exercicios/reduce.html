@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const pessoas = [
+  {
+    nome: "Rodrigo",
+    idade: 35
+  },
+  {
+    nome: "Gustavo",
+    idade: 5
+  },
+  {
+    nome: "Raquel",
+    idade: 33
+  },
+  {
+    nome: "Lucas",
+    idade: 15
+  },
+  {
+    nome: "Heloisa",
+    idade: 52
+  }
+];
+
+const pessoasAgrupadas = pessoas.reduce(
+  function(valorAcumulador, valorArray) {
+    const maiorOuMenor = valorArray.idade <= 18 ? "menores" : "maiores";
+    valorAcumulador[maiorOuMenor].push(valorArray)
+
+    return valorAcumulador;
+  },
+  { maiores: [], menores: [] }
+);
+
+console.log('Pessoas agrupadas: ' + pessoasAgrupadas)
+    </script>
+</body>
+</html>

@@ -27,7 +27,7 @@ const nomes = ["Rodrigo", "Gustavo", "Moreira"];
 
 console.log(nomes.map(n => n.toLowerCase()));
 
-console.log('numeros ', numeros);
+console.log("numeros ", numeros);
 let mult = [];
 for (let i = 0; i > numeros.length; i++) {
   if (numeros[i] % 2 === 0) {
@@ -36,11 +36,60 @@ for (let i = 0; i > numeros.length; i++) {
 }
 console.log(mult);
 
-const numerosFiltrados = numeros.filter(n => n % 2 ===0)
+//--------------------
+const numerosFiltrados = numeros.filter(n => n % 2 === 0);
+
 console.log(numerosFiltrados);
 
-const arrayMapFilter = numeros
-    .filter( n => n % 2 === 0)
-    .map(n => n * 2)
+const arrayMapFilter = numeros.filter(n => n % 2 === 0).map(n => n * 2);
 
 console.log(arrayMapFilter);
+
+//--------------------
+let soma = 0;
+for (let i = 0; i < arrayMapFilter.length; i++) {
+  soma += arrayMapFilter[i];
+}
+console.log("A soma é " + soma);
+
+let soma1 = 0;
+arrayMapFilter.forEach(s => (soma1 += s));
+
+console.log("A soma é " + soma1);
+//--------------------
+
+const reducer = (valorAcumulador, valorArray) => valorAcumulador + valorArray;
+
+let somaReducer = arrayMapFilter.reduce(reducer);
+
+console.log("Soma reduce: " + somaReducer);
+
+const pessoas = [
+  {
+    nome: "Rodrigo",
+    idade: 35
+  },
+  {
+    nome: "Gustavo",
+    idade: 5
+  },
+  {
+    nome: "Raquel",
+    idade: 33
+  },
+  {
+    nome: "Lucas",
+    idade: 15
+  },
+  {
+    nome: "Heloisa",
+    idade: 52
+  }
+];
+
+pessoas.reduce(
+  function(valorAcumulador, valorArray) {
+    const maiorOuMenor = valorArray.idade <= 18 ? "menores" : "maiores";
+  },
+  { maiores: [], menores: [] }
+);
