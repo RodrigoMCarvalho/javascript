@@ -96,5 +96,5 @@ const pessoasAgrupadas = pessoas.reduce(
   },
   { menores: [], maiores: [] }
 );
-
-console.log('Pessoas agrupadas: ' + pessoasAgrupadas)
+var pessoasAgrupadasJson = JSON.stringify(pessoasAgrupadas)
+console.log('Pessoas agrupadas: ' + pessoasAgrupadasJson)
