@@ -38,11 +38,9 @@ console.log(mult);
 
 //--------------------
 const numerosFiltrados = numeros.filter(n => n % 2 === 0);
-
-console.log(numerosFiltrados);
+console.log('Numeros filtrados: ' + numerosFiltrados);
 
 const arrayMapFilter = numeros.filter(n => n % 2 === 0).map(n => n * 2);
-
 console.log(arrayMapFilter);
 
 //--------------------
@@ -54,12 +52,10 @@ console.log("A soma é " + soma);
 
 let soma1 = 0;
 arrayMapFilter.forEach(s => (soma1 += s));
-
 console.log("A soma é " + soma1);
 //--------------------
 
 const reducer = (valorAcumulador, valorArray) => valorAcumulador + valorArray;
-
 let somaReducer = arrayMapFilter.reduce(reducer);
 
 console.log("Soma reduce: " + somaReducer);
