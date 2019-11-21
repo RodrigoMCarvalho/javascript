@@ -15,7 +15,7 @@ function adicionar() {
 
   } else {
     valores.push(num.value); //adiciona no array
-    let item = document.createElement("option");  //criar uma tag optino em modelo.html
+    let item = document.createElement("option");  //criar uma tag option em modelo.html
     item.text = `Valor ${num.value} adicionado.`;
     lista.appendChild(item);
 
