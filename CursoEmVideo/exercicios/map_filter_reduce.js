@@ -12,7 +12,7 @@ for (let i = 0; i < numeros.length; i++) {
 console.log(numeros);
 console.log(novoArrayNumeros);
 
-//mesmo comportmento do for
+//mesmo comportamento do for
 const numerosMap = numeros.map(function(n) {
   return n * 3;
 });
