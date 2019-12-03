@@ -20,13 +20,7 @@ export default function renderUserList(userData) {
     var name = userData[i].name;
     var email = userData[i].email;
     var telefone = userData[i].telefone;
-    var status = userData[i].status;
-
-    if (status) {
-      status = 'Ativado';
-    } else {
-      status = 'Desativado';
-    }
+    var status = userData[i].status ? 'Ativado' : 'Desativado';
 
     usersHTML += (
       '<tr>' +
