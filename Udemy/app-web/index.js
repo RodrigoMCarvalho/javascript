@@ -28,16 +28,22 @@ server.get('/echo/:name', function (req, res, next) {
     return next();
 });
 
+server.get('/', restify.plugins.serveStatic({  //plugin do Restify que define o diretório padrão
+    directory: './dist',
+    file:  'index.html'
+}));
+
+
   ////////////  ROTAS CRUD
-server.get('/', function (req, res, next) {
-    knex('rest').then((dados)=> {   // rest é a tabela criada no BD
+server.get('/read', function (req, res, next) {
+    knex('tb_rest').then((dados)=> {   // rest é a tabela criada no BD
         res.send(dados);
     }, next)
     return next();
 });
 
 server.post('/create', function (req, res, next) {
-    knex('rest').insert(req.body)
+    knex('tb_rest').insert(req.body)
                 .then((dados)=> {  
         res.send(dados);
     }, next)
@@ -46,7 +52,7 @@ server.post('/create', function (req, res, next) {
 
 server.get('/show/:id', function (req, res, next) {
     const { id } = req.params;
-    knex('rest').where('id', id)
+    knex('tb_rest').where('id', id)
                 .first()
                 .then((dados)=> { 
                     if(!dados) 
@@ -57,7 +63,7 @@ server.get('/show/:id', function (req, res, next) {
 
 server.put('/update/:id', function (req, res, next) {
     const { id } = req.params;
-    knex('rest').where('id', id)
+    knex('tb_rest').where('id', id)
                 .update(req.body)
                 .then((dados)=> { 
                     if(!dados) 
@@ -68,7 +74,7 @@ server.put('/update/:id', function (req, res, next) {
 
 server.del('/delete/:id', function (req, res, next) {
     const { id } = req.params;
-    knex('rest').where('id', id)
+    knex('tb_rest').where('id', id)
                 .delete()
                 .then((dados)=> { 
                     if(!dados) 
