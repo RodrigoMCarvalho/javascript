@@ -43,7 +43,8 @@ server.get('/read', function (req, res, next) {
 });
 
 server.post('/create', function (req, res, next) {
-    knex('tb_rest').insert(req.body)
+    knex('tb_rest')
+                .insert(req.body)
                 .then((dados)=> {  
         res.send(dados);
     }, next)

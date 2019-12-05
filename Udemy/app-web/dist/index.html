@@ -42,55 +42,73 @@
         $("#botao").click(function () {
             create();
         });
-        
     });
-        function templateLi(id, name) {
-            return `<li class="list-group-item">${name}</li>`;
-        }
-        function limpar(){
-            $('#texto').val("");
-        }
+    lista.addEventListener('click', del); //Outra forma de chamar o evento "click" com javascript
+
+    function templateLi(id, name) {
+        return `<li class="list-group-item">${name}
+                <i class="btn btn-danger delete fa fa-trash"
+                    style="float: right; margin-left: 5px;"
+                    data-id="${id}";
+                    ></i></li>
+        `;
+    }
+    function limpar(){
+        $('#texto').val("");
+    }
 
 
-        function read() {
-            lista.innerHTML = '';
-            axios.get('http://localhost:8080/read')  //chamada AJAX para o servidor na rota /read usando a biblioteca AXIOS
-                .then((response) => {
-                console.log(response);  //no console do Chrome é mostrado o arrays de nomes
-                response.data.forEach(element => {
-                    lista.innerHTML += templateLi(element.id, element.name); 
-                });
-            })
+    function read() {
+        lista.innerHTML = '';
+        axios.get('http://localhost:8080/read')  //chamada AJAX para o servidor na rota /read usando a biblioteca AXIOS
+            .then((response) => {
+            console.log(response);  //no console do Chrome é mostrado o arrays de nomes
+            response.data.forEach(element => {
+                lista.innerHTML += templateLi(element.id, element.name); 
+            });
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    function create() {
+        const name = texto.value;
+        axios.post('http://localhost:8080/create', {name})  //chamada AJAX para o servidor na rota /create usando a biblioteca AXIOS
+            .then((response) => {
+            console.log(response);  //no console do Chrome é mostrado o arrays de nomes
+            lista.innerHTML += templateLi(response.data[0], name);
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+        limpar();
+    }
+
+    function edit() {
+
+    }
+
+    function update() {
+
+    }
+
+    function del(element) {
+        console.log(element);
+        if(element.target.classList.contains('delete')) {   //Referente a classe 'delete' do botão class="btn btn-danger delete fa fa-trash"
+            const id = element.target.dataset.id;
+            axios.delete(`http://localhost:8080/delete/${id}`)
+                .then(function(response) {
+                    if(response.status = 200) {
+                        lista.removeChild(element.path[1]);
+                    }
+                })
                 .catch((error) => {
                 console.log(error);
             });
         }
+    }
 
-        function create() {
-            const name = texto.value;
-            axios.post('http://localhost:8080/create', {name})  //chamada AJAX para o servidor na rota /create usando a biblioteca AXIOS
-                .then((response) => {
-                console.log(response);  //no console do Chrome é mostrado o arrays de nomes
-                lista.innerHTML += templateLi(response.data[0], name);
-            })
-                .catch((error) => {
-                console.log(error);
-            });
-            limpar();
-        }
-
-        function edit() {
-
-        }
-
-        function update() {
-
-        }
-
-        function del() {
-
-        }
-    
     </script>
 
 
