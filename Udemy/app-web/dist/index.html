@@ -46,8 +46,10 @@
     lista.addEventListener('click', del); //Outra forma de chamar o evento "click" com javascript
     lista.addEventListener('click', edit);
 
-    function templateLi(id, name) {
-        return `<li class="list-group-item">${name}
+    function templateLi(id, name, element = true) {
+        return `
+                ${element ? `<li class="list-group-item">` : ''}  
+                    ${name}
                     <i class="btn btn-danger delete fa fa-trash"
                         style="float: right; margin-left: 5px;"
                         data-id="${id}";
@@ -56,13 +58,13 @@
                         style="float: right;"
                         data-id="${id}";
                     ></i>
-                </li>
+                ${element ? `</li>` : ''}  
+                
         `;
     }
     function limpar(){
         $('#texto').val("");
     }
-
 
     function read() {
         lista.innerHTML = '';
@@ -101,11 +103,25 @@
 
             pai.innerHTML = '';
             pai.appendChild(input);
+            input.addEventListener('keydown', update.bind(pai, id, input));
+            input.focus();
         }
     }
 
-    function update() {
+    function update(id, input) {
+        const x = event.key;
+        if( x === null || x !== 'Enter') return;
 
+        axios.put(`http://localhost:8080/update/${id}`, {name: input.value})
+            .then((response) => {
+                if(response.status = 200) {
+                    this.innerHTML = templateLi(id, input.value, false);
+                }
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+        limpar();
     }
 
     function del(element) {
